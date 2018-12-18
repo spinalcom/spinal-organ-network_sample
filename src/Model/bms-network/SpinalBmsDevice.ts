@@ -22,7 +22,8 @@
  * <http://resources.spinalcom.com/licenses.pdf>.
  */
 
-import { Model, Str, spinalCore } from 'spinal-core-connectorjs_type';
+import { Model, spinalCore } from 'spinal-core-connectorjs_type';
+import { genUID } from '../../Utils/genUID';
 
 class SpinalBmsDevice extends Model {
   public static relationName: string = 'hasBmsDevice';
@@ -33,7 +34,8 @@ class SpinalBmsDevice extends Model {
   public type: spinal.Str;
   public path: spinal.Str;
 
-  constructor(id: string= '', name: string= '', type: string= '', path: string= '') {
+  constructor(name: string= '', type: string= '', path: string= '',
+              id: string = genUID('SpinalBmsDevice'))  {
     super();
     this.add_attr({
       id,

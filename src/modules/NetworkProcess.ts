@@ -41,35 +41,38 @@ import {
   SpinalBmsEndpointGroup,
 } from '../Model/bms-network/SpinalBms';
 
+import { ConfigOrgan } from '../Utils/ConfigOrgan';
+
 class NetworkProcess {
   private inputData: InputData;
   private nwService : NetworkService;
   private contextId: string;
+  private networkId: string;
 
   constructor(inputData: InputData) {
     this.inputData = inputData;
     this.nwService = new NetworkService;
   }
 
-  public async init(forgeFile: ForgeFileItem, contextName: string, contextType: string)
+  public async init(forgeFile: ForgeFileItem, configOrgan : ConfigOrgan)
   : Promise<void> {
 
-    this.contextId = await this.nwService.init(forgeFile, contextName, contextType);
+    const resultInit = await this.nwService.init(forgeFile, configOrgan);
+    this.contextId = resultInit.contextId;
+    this.networkId = resultInit.networkId;
     this.inputData.setOnDataCBFunc(this.updateData.bind(this));
   }
 
   public async updateData(obj: InputDataDevice): Promise<void> {
     const contextChildren =
-      await SpinalGraphService.getChildrenInContext(this.contextId, this.contextId);
-
-    console.log(contextChildren);
+      await SpinalGraphService.getChildrenInContext(this.networkId, this.contextId);
 
     for (const child of contextChildren) {
       if (typeof child.idNetwork !== 'undefined' && child.idNetwork.get() === obj.id) {
         return this.updateModel(child, obj);
       }
     }
-    return this.nwService.createNewBmsDevice(this.contextId, obj).then((child) => {
+    return this.nwService.createNewBmsDevice(this.networkId, obj).then((child) => {
       return this.updateModel(child, <InputDataDevice>obj);
     });
   }

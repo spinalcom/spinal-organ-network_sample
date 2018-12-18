@@ -22,20 +22,25 @@
  * <http://resources.spinalcom.com/licenses.pdf>.
  */
 
-import { SpinalBmsDevice } from './SpinalBmsDevice';
-import { SpinalBmsNetwork } from './SpinalBmsNetwork';
-import { SpinalBmsEndpoint } from './SpinalBmsEndpoint';
-import { SpinalBmsEndpointGroup } from './SpinalBmsEndpointGroup';
+import { Model, spinalCore } from 'spinal-core-connectorjs_type';
+import { genUID } from '../../Utils/genUID';
+class SpinalBmsNetwork extends Model {
+  public static relationName: string = 'hasBmsNetwork';
+  public static nodeTypeName: string = 'BmsNetwork';
 
-const obj = {
-  SpinalBmsDevice,
-  SpinalBmsNetwork,
-  SpinalBmsEndpoint,
-  SpinalBmsEndpointGroup,
-};
+  public id: spinal.Str;
+  public name: spinal.Str;
 
-export default obj;
-export { SpinalBmsDevice };
+  constructor(name: string= '', type: string= '', id: string = genUID('SpinalBmsNetwork')) {
+    super();
+    this.add_attr({
+      id,
+      name,
+      type,
+    });
+  }
+}
+spinalCore.register_models(SpinalBmsNetwork);
+
+export default SpinalBmsNetwork;
 export { SpinalBmsNetwork };
-export { SpinalBmsEndpoint };
-export { SpinalBmsEndpointGroup };

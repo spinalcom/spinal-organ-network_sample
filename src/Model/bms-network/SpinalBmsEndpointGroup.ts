@@ -23,6 +23,7 @@
  */
 
 import { Model, spinalCore } from 'spinal-core-connectorjs_type';
+import { genUID } from '../../Utils/genUID';
 
 class SpinalBmsEndpointGroup extends Model {
   public static relationName: string = 'hasBmsEndpointGroup';
@@ -33,7 +34,8 @@ class SpinalBmsEndpointGroup extends Model {
   public type: spinal.Str;
   public path: spinal.Str;
 
-  constructor(id: string= '', name: string= '', type: string= '', path: string= '') {
+  constructor(name: string= '', type: string= '', path: string= '',
+              id: string = genUID('SpinalBmsNetwork')) {
     super();
     this.add_attr({
       id,
