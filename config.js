@@ -13,6 +13,7 @@ module.exports = {
   organ: {
     contextName: "Network",
     contextType: "Network",
-    networkType: "NetworkVirtual"
+    networkType: "NetworkVirtual",
+    networkName: "NetworkVirtual"
   }
 };

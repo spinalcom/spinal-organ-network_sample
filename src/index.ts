@@ -22,9 +22,8 @@
  * <http://resources.spinalcom.com/licenses.pdf>.
  */
 
-// import * as spinalCore from 'spinal-core-connectorjs';
+// import './test';
 import { spinalCore } from 'spinal-core-connectorjs_type';
-// const spinalCore = require('spinal-core-connectorjs');
 import { ForgeFileItem } from 'spinal-lib-forgefile';
 
 // get the config
@@ -57,7 +56,9 @@ function onLoadSuccess(forgeFile: ForgeFileItem) {
   const networkProcess = new NetworkProcess(inputData);
 
   // reset data for test purpose
-  if (typeof forgeFile.graph !== 'undefined') forgeFile.rem_attr('graph');
+  // if (typeof forgeFile.graph !== 'undefined')
+  //    forgeFile.rem_attr('graph');
+
   networkProcess.init(
       forgeFile, config.organ);
 }

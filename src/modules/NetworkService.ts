@@ -24,7 +24,6 @@
 import {
   SpinalGraphService,
   SpinalContext,
-  SpinalNode,
   SPINAL_RELATION_TYPE,
 } from 'spinal-env-viewer-graph-service';
 import { ForgeFileItem } from 'spinal-lib-forgefile';
@@ -34,7 +33,6 @@ import {
   InputDataEndpointGroup,
   InputDataEndpointDataType,
 } from './InputData/InputDataModel/InputDataModel';
-import { Model } from 'spinal-core-connectorjs_type';
 import {
   SpinalBmsDevice,
   SpinalBmsNetwork,
@@ -49,7 +47,7 @@ class NetworkService {
   constructor() {
   }
 
-  public async init(forgeFile: spinal.Model, configOrgan: ConfigOrgan)
+  public async init(forgeFile: ForgeFileItem, configOrgan: ConfigOrgan)
   : Promise<{contextId:string, networkId: string}> {
     await SpinalGraphService.setGraphFromForgeFile(forgeFile);
 
@@ -64,25 +62,35 @@ class NetworkService {
       await SpinalGraphService.getChildrenInContext(this.contextId, this.contextId);
     let childFoundId: string = '';
     for (const childContext of childrenContext) {
-      if (childContext.type.get() === configOrgan.networkType) {
+      if (typeof childContext.name !== 'undefined' &&
+      childContext.networkName.get() === configOrgan.networkName) {
         childFoundId = childContext.id.get();
         break;
       }
     }
     if (childFoundId === '') {
-      childFoundId = await this.createNewBmsNetwork(this.contextId, configOrgan.networkType).then(
-        res => <string>res.id.get(),
-      );
+      childFoundId = await this.createNewBmsNetwork(
+          this.contextId,
+          configOrgan.networkType,
+          configOrgan.networkName,
+          ).then(res => <string>res.id.get());
     }
     return { contextId:this.contextId, networkId: childFoundId };
   }
 
-  public async createNewBmsNetwork(parentId: string, typeName: string): Promise<any> {
+  public async createNewBmsNetwork(parentId: string, typeName: string, networkName: string)
+  : Promise<any> {
     const res = new SpinalBmsNetwork(
-      typeName,
+      networkName,
       typeName,
     );
-    const tmpInfo = { type:'BmsNetwork', name: typeName, idNetwork: res.id.get() };
+    const tmpInfo = {
+      networkName,
+      typeName,
+      type:'BmsNetwork',
+      name: typeName,
+      idNetwork: res.id.get(),
+    };
     const childId = SpinalGraphService.createNode(tmpInfo, res);
     await SpinalGraphService.addChildInContext(
       parentId,

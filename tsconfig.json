@@ -3,9 +3,11 @@
     "target": "es2015",
     "module": "commonjs",
     "outDir": "dist",
+    "declaration": true,
     "sourceMap": true
   },
   "files": [
+    "./node_modules/@types/mocha/index.d.ts",
     "./node_modules/@types/node/index.d.ts",
     "./node_modules/spinal-core-connectorjs_type/declarations/SpinalModel.d.ts"
     ],

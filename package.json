@@ -4,8 +4,9 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "build": "rm -r dist && tsc",
-    "dev": "rm -r dist && tsc --watch & nodemon --inspect dist"
+    "build": "rm -rf dist && tsc",
+    "dev": "rm -rf dist && tsc --watch & nodemon dist",
+    "test": "rm -rf dist && tsc && mocha --require ts-node/register test/**/*.ts"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +23,8 @@
     "mocha": "^5.2.0",
     "nodemon": "^1.18.8",
     "spinal-lib-forgefile": "git+https://github.com/spinalcom/spinal-lib-forgefile.git",
+    "timekeeper": "^2.1.2",
+    "ts-node": "^7.0.1",
     "tsc": "^1.20150623.0",
     "tslint": "^5.11.0",
     "tslint-config-airbnb": "^5.11.1",
