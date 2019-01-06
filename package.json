@@ -4,8 +4,8 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "build": "rm -r dist && tsc",
-    "dev": "rm -r dist && tsc --watch & nodemon --inspect dist"
+    "build": "rm -rf dist && tsc",
+    "dev": "rm -rf dist && tsc --watch & nodemon dist"
   },
   "keywords": [],
   "author": "",
