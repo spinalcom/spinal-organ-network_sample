@@ -8,11 +8,12 @@ module.exports = {
   },
   file: {
     // path to a digital twin in spinalhub filesystem
-    path: process.env.SPINAL_DTWIN_PATH || '/__users__/admin/deiv4',
+    path: process.env.SPINAL_DTWIN_PATH || '/__users__/admin/deiv4'
   },
   organ: {
     contextName: "Network",
     contextType: "Network",
-    networkType: "NetworkVirtual"
+    networkType: "NetworkVirtual",
+    networkName: "NetworkVirtual"
   }
 };
