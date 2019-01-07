@@ -24,7 +24,9 @@
 
 import { InputDataDevice } from './InputDataDevice';
 import { InputDataEndpoint } from './InputDataEndpoint';
-import { InputDataEndpointDataType } from './InputDataEndpointDataType';
+import {
+  InputDataEndpointDataType,
+} from 'spinal-service-bmsnetwork';
 import { InputDataEndpointGroup } from './InputDataEndpointGroup';
 
 export {

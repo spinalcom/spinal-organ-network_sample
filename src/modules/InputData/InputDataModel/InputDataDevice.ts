@@ -25,19 +25,25 @@
 import { genUID } from '../../../Utils/genUID';
 import { InputDataEndpoint } from './InputDataEndpoint';
 import { InputDataEndpointGroup } from './InputDataEndpointGroup';
+import {
+  InputDataDevice as idDevice,
+} from 'spinal-service-bmsnetwork';
+import { SpinalBmsDevice } from 'spinal-model-bmsnetwork';
 
-export class InputDataDevice {
+export class InputDataDevice implements idDevice {
   public id: string;
   public name: string;
   public type: string;
   public path: string;
-  public children: (InputDataEndpoint|InputDataEndpointGroup|InputDataDevice)[];
+  public children: (InputDataDevice|InputDataEndpoint|InputDataEndpointGroup)[];
+  public nodeTypeName: string;
   constructor(
       name: string = 'default device name',
       type: string = 'default device type',
-      path: string = 'default device path',
       id: string = genUID('InputDataDevice'),
+      path: string = 'default device path',
       ) {
+    this.nodeTypeName = SpinalBmsDevice.nodeTypeName;
     this.id = id;
     this.name = name;
     this.type = type;
