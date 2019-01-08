@@ -58,5 +58,6 @@ function onLoadSuccess(forgeFile: ForgeFileItem) {
 
   // reset data for test purpose
   // if (typeof forgeFile.graph !== 'undefined') forgeFile.rem_attr('graph');
+
   networkProcess.init(forgeFile, config.organ);
 }
