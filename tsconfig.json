@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "noImplicitAny": true,
+    "skipLibCheck": false,
     "target": "es2015",
     "module": "commonjs",
     "outDir": "dist",

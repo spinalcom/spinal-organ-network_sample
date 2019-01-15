@@ -22,13 +22,13 @@
  * <http://resources.spinalcom.com/licenses.pdf>.
  */
 
-// import * as spinalCore from 'spinal-core-connectorjs';
 import { spinalCore } from 'spinal-core-connectorjs_type';
-// const spinalCore = require('spinal-core-connectorjs');
 import { ForgeFileItem } from 'spinal-lib-forgefile';
 
+require('json5/lib/register');
 // get the config
-import * as config from '../config.js';
+const config = require('../config.json5');
+// import config from '../config.json5';
 
 import { InputData } from './modules/InputData/InputData';
 import { NetworkProcess } from './modules/NetworkProcess';

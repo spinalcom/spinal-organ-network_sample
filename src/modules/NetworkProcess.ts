@@ -24,32 +24,56 @@
 
 import { ForgeFileItem } from 'spinal-lib-forgefile';
 import { InputData } from './InputData/InputData';
-import { NetworkService } from 'spinal-service-bmsnetwork';
+import { NetworkService } from 'spinal-model-bmsnetwork';
 import {
   InputDataDevice,
 } from './InputData/InputDataModel/InputDataModel';
 
 import { ConfigOrgan } from '../Utils/ConfigOrgan';
 
-class NetworkProcess {
+/**
+ *
+ *
+ * @export
+ * @class NetworkProcess
+ */
+export class NetworkProcess {
   private inputData: InputData;
   private nwService : NetworkService;
 
+  /**
+   *Creates an instance of NetworkProcess.
+   * @param {InputData} inputData
+   * @memberof NetworkProcess
+   */
   constructor(inputData: InputData) {
     this.inputData = inputData;
     this.nwService = new NetworkService();
   }
 
+  /**
+   *
+   *
+   * @param {ForgeFileItem} forgeFile
+   * @param {ConfigOrgan} configOrgan
+   * @returns {Promise<void>}
+   * @memberof NetworkProcess
+   */
   public async init(forgeFile: ForgeFileItem, configOrgan : ConfigOrgan)
   : Promise<void> {
     await this.nwService.init(forgeFile, configOrgan);
     this.inputData.setOnDataCBFunc(this.updateData.bind(this));
   }
 
+  /**
+   *
+   *
+   * @param {InputDataDevice} obj
+   * @memberof NetworkProcess
+   */
   updateData(obj: InputDataDevice) {
+    console.log('Update data device ! => ', obj.name);
     this.nwService.updateData.call(this.nwService, obj);
   }
 
 }
-
-export { NetworkProcess };

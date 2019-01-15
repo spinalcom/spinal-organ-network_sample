@@ -22,8 +22,10 @@
  * <http://resources.spinalcom.com/licenses.pdf>.
  */
 
-import { InputDataEndpointGroup as idEndpointGroup } from 'spinal-service-bmsnetwork';
-import { SpinalBmsEndpointGroup } from 'spinal-model-bmsnetwork';
+import {
+  InputDataEndpointGroup as idEndpointGroup,
+  SpinalBmsEndpointGroup,
+} from 'spinal-model-bmsnetwork';
 
 import { genUID } from '../../../Utils/genUID';
 
@@ -40,9 +42,9 @@ export class InputDataEndpointGroup implements idEndpointGroup {
   constructor(
     name: string = 'default EndpointGroup name',
     type: string = 'default EndpointGroup type',
-    path: string = 'default EndpointGroup path',
     id: string = genUID('InputDataEndpointGroup'),
-  ) {
+    path: string = 'default EndpointGroup path',
+    ) {
     this.nodeTypeName = SpinalBmsEndpointGroup.nodeTypeName;
     this.id = id;
     this.name = name;

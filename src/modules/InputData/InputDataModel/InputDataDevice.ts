@@ -27,8 +27,8 @@ import { InputDataEndpoint } from './InputDataEndpoint';
 import { InputDataEndpointGroup } from './InputDataEndpointGroup';
 import {
   InputDataDevice as idDevice,
-} from 'spinal-service-bmsnetwork';
-import { SpinalBmsDevice } from 'spinal-model-bmsnetwork';
+  SpinalBmsDevice,
+} from 'spinal-model-bmsnetwork';
 
 export class InputDataDevice implements idDevice {
   public id: string;

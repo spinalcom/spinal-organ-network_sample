@@ -22,12 +22,12 @@
  * <http://resources.spinalcom.com/licenses.pdf>.
  */
 
-import { SpinalBmsEndpoint } from 'spinal-model-bmsnetwork';
 import {
   InputDataEndpoint as idEndpoint,
   InputDataEndpointDataType,
   InputDataEndpointType,
-} from 'spinal-service-bmsnetwork';
+  SpinalBmsEndpoint,
+} from 'spinal-model-bmsnetwork';
 
 import { genUID } from '../../../Utils/genUID';
 

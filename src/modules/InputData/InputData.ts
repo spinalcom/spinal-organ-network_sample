@@ -26,6 +26,8 @@ import {
   InputDataDevice,
   InputDataEndpoint,
   InputDataEndpointGroup,
+  InputDataEndpointDataType,
+  InputDataEndpointType,
 } from './InputDataModel/InputDataModel';
 
 type onDataFunctionType = (obj: InputDataDevice) => void;
@@ -96,23 +98,48 @@ class InputData {
    * @memberof InputData
    */
   private generateDataDevice(id : number): InputDataDevice {
-    const res: InputDataDevice = new InputDataDevice(`DEVICE ${id}`);
 
-    const CHILD_1: InputDataDevice = new InputDataDevice(`DEVICE ${id} CHILD_1 - device`);
-    const CHILD_1_1: InputDataEndpointGroup =
-      new InputDataEndpointGroup(`DEVICE ${id} CHILD_1_1 group`);
+    function createFunc(str: string, type: string,
+                        constructor: typeof InputDataDevice | typeof InputDataEndpointGroup): any {
+      return new constructor(str, type, str, '');
+    }
+
+    const res: InputDataDevice = createFunc(`DEVICE ${id}`, 'device', InputDataDevice);
+    const CHILD_1: InputDataDevice = createFunc(`DEVICE ${id} CHILD_1 - device`,
+                                                'device', InputDataDevice);
+    const CHILD_1_1: InputDataEndpointGroup = createFunc(`DEVICE ${id} CHILD_1_1 group`,
+                                                         'endpointgroup', InputDataEndpointGroup);
+
     const CHILD_1_1_1: InputDataEndpoint =
-      new InputDataEndpoint(`DEVICE ${id} CHILD_1_1_1 endpoint`);
-    const CHILD_1_2: InputDataEndpoint = new InputDataEndpoint(`DEVICE ${id} CHILD_1_2 endpoint`);
+      new InputDataEndpoint(`DEVICE ${id} CHILD_1_1_1 endpoint`, 0, 'Celsius',
+                            InputDataEndpointDataType.Integer,
+                            InputDataEndpointType.Temperature,
+                            `DEVICE-${id} CHILD_1_1_1 endpoint`, '');
+
+    const CHILD_1_2: InputDataEndpoint =
+      new InputDataEndpoint(`DEVICE ${id} CHILD_1_2 endpoint`, 0, 'Celsius',
+                            InputDataEndpointDataType.Integer,
+                            InputDataEndpointType.Temperature,
+                            `DEVICE-${id} CHILD_1_2 endpoint`, '');
+
     CHILD_1.children.push(CHILD_1_1, CHILD_1_2);
     CHILD_1_1.children.push(CHILD_1_1_1);
 
-    const CHILD_2: InputDataEndpointGroup =
-      new InputDataEndpointGroup(`DEVICE ${id} CHILD_2 group`);
-    const CHILD_2_1: InputDataEndpoint = new InputDataEndpoint(`DEVICE ${id} CHILD_2_1 endpoint`);
+    const CHILD_2: InputDataEndpointGroup = createFunc(`DEVICE ${id} CHILD_2 group`,
+                                                       'endpointgroup', InputDataEndpointGroup);
+
+    const CHILD_2_1: InputDataEndpoint =
+      new InputDataEndpoint(`DEVICE ${id} CHILD_2_1 endpoint`, 0, 'Celsius',
+                            InputDataEndpointDataType.Integer,
+                            InputDataEndpointType.Temperature,
+                            `DEVICE-${id} CHILD_2_1 endpoint`, '');
     CHILD_2.children.push(CHILD_2_1);
 
-    const CHILD_3: InputDataEndpoint = new InputDataEndpoint(`DEVICE ${id} CHILD_3 endpoint`);
+    const CHILD_3: InputDataEndpoint =
+      new InputDataEndpoint(`DEVICE ${id} CHILD_3 endpoint`, 0, 'Celsius',
+                            InputDataEndpointDataType.Integer,
+                            InputDataEndpointType.Temperature,
+                            `DEVICE-${id} CHILD_3 endpoint`, '');
     res.children.push(CHILD_1, CHILD_2, CHILD_3);
 
     return res;

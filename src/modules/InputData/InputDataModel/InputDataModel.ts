@@ -27,7 +27,7 @@ import { InputDataEndpoint } from './InputDataEndpoint';
 import {
   InputDataEndpointDataType,
   InputDataEndpointType,
-} from 'spinal-service-bmsnetwork';
+} from 'spinal-model-bmsnetwork';
 import { InputDataEndpointGroup } from './InputDataEndpointGroup';
 
 export {
