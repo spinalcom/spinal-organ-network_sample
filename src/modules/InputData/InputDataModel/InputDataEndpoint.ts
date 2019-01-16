@@ -31,6 +31,20 @@ import {
 
 import { genUID } from '../../../Utils/genUID';
 
+/**
+ * @property {string} id
+ * @property {string} name
+ * @property {string} path
+ * @property {number | string} currentValue
+ * @property {string} unit
+ * @property {InputDataEndpointDataType} dataType
+ * @property {InputDataEndpointType} type
+ * @property {string} nodeTypeName equal SpinalBmsEndpoint.nodeTypeName
+ * @property {any[]} timeseries
+ * @export
+ * @class InputDataEndpoint
+ * @implements {idEndpoint}
+ */
 export class InputDataEndpoint implements idEndpoint {
   public id: string;
   public name: string;
@@ -40,7 +54,19 @@ export class InputDataEndpoint implements idEndpoint {
   public dataType: InputDataEndpointDataType;
   public type: InputDataEndpointType;
   public nodeTypeName: string;
+  public timeseries: any[];
 
+  /**
+   *Creates an instance of InputDataEndpoint.
+   * @param {string} [name='default endpoint name']
+   * @param {(number | string)} [currentValue=0]
+   * @param {string} [unit='unit']
+   * @param {InputDataEndpointDataType} [dataType=InputDataEndpointDataType.Integer]
+   * @param {InputDataEndpointType} [type=InputDataEndpointType.Other]
+   * @param {string} [id=genUID('InputDataEndpoint')]
+   * @param {string} [path='default endpoint path']
+   * @memberof InputDataEndpoint
+   */
   constructor(
     name: string = 'default endpoint name',
     currentValue: number | string = 0,
@@ -58,5 +84,6 @@ export class InputDataEndpoint implements idEndpoint {
     this.currentValue = currentValue;
     this.unit = unit;
     this.dataType = dataType;
+    this.timeseries = [];
   }
 }

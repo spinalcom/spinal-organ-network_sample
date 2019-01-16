@@ -30,6 +30,17 @@ import {
   SpinalBmsDevice,
 } from 'spinal-model-bmsnetwork';
 
+/**
+ * @property {string} id
+ * @property {string} name
+ * @property {string} type
+ * @property {string} path
+ * @property {Array<InputDataDevice|InputDataEndpoint|InputDataEndpointGroup>} children
+ * @property {string} nodeTypeName equals SpinalBmsDevice.nodeTypeName
+ * @export
+ * @class InputDataDevice
+ * @implements {idDevice}
+ */
 export class InputDataDevice implements idDevice {
   public id: string;
   public name: string;
@@ -37,6 +48,14 @@ export class InputDataDevice implements idDevice {
   public path: string;
   public children: (InputDataDevice|InputDataEndpoint|InputDataEndpointGroup)[];
   public nodeTypeName: string;
+  /**
+   *Creates an instance of InputDataDevice.
+   * @param {string} [name='default device name']
+   * @param {string} [type='default device type']
+   * @param {string} [id=genUID('InputDataDevice')]
+   * @param {string} [path='default device path']
+   * @memberof InputDataDevice
+   */
   constructor(
       name: string = 'default device name',
       type: string = 'default device type',

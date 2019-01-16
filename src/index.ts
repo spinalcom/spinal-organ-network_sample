@@ -28,7 +28,6 @@ import { ForgeFileItem } from 'spinal-lib-forgefile';
 require('json5/lib/register');
 // get the config
 const config = require('../config.json5');
-// import config from '../config.json5';
 
 import { InputData } from './modules/InputData/InputData';
 import { NetworkProcess } from './modules/NetworkProcess';

@@ -19,6 +19,15 @@ Sample organ to demonstrate how to use the spinal-model-bmsnetwork.
     - [inputData.setOnDataCBFunc(onData)](#inputdatasetondatacbfuncondata)
     - [InputData.InputData](#inputdatainputdata)
       - [new InputData()](#new-inputdata-1)
+  - [InputDataDevice](#inputdatadevice)
+    - [InputDataDevice.InputDataDevice](#inputdatadeviceinputdatadevice)
+      - [new InputDataDevice([name], [type], [id], [path])](#new-inputdatadevicename-type-id-path)
+  - [InputDataEndpoint](#inputdataendpoint)
+    - [InputDataEndpoint.InputDataEndpoint](#inputdataendpointinputdataendpoint)
+      - [new InputDataEndpoint([name], [currentValue], [unit], [dataType], [type], [id], [path])](#new-inputdataendpointname-currentvalue-unit-datatype-type-id-path)
+  - [InputDataEndpointGroup](#inputdataendpointgroup)
+    - [InputDataEndpointGroup.InputDataEndpointGroup](#inputdataendpointgroupinputdataendpointgroup)
+      - [new InputDataEndpointGroup([name], [type], [id], [path])](#new-inputdataendpointgroupname-type-id-path)
   - [NetworkProcess](#networkprocess)
     - [networkProcess.init(forgeFile, configOrgan) ⇒ <code>Promise.&lt;void&gt;</code>](#networkprocessinitforgefile-configorgan-%E2%87%92-codepromiseltvoidgtcode)
     - [networkProcess.updateData(obj)](#networkprocessupdatedataobj)
@@ -102,6 +111,12 @@ The organ will search for `organ.ContextType` and  `organ.networkType` then crea
 <dl>
 <dt><a href="#InputData">InputData</a></dt>
 <dd></dd>
+<dt><a href="#InputDataDevice">InputDataDevice</a></dt>
+<dd></dd>
+<dt><a href="#InputDataEndpoint">InputDataEndpoint</a></dt>
+<dd></dd>
+<dt><a href="#InputDataEndpointGroup">InputDataEndpointGroup</a></dt>
+<dd></dd>
 <dt><a href="#NetworkProcess">NetworkProcess</a></dt>
 <dd></dd>
 </dl>
@@ -142,6 +157,129 @@ The organ will search for `organ.ContextType` and  `organ.networkType` then crea
 #### new InputData()
 <p>Creates an instance of InputData.</p>
 
+<a name="InputDataDevice"></a>
+
+## InputDataDevice
+**Kind**: global class  
+**Implements**: <code>idDevice</code>  
+**Export**:   
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| id | <code>string</code> |  |
+| name | <code>string</code> |  |
+| type | <code>string</code> |  |
+| path | <code>string</code> |  |
+| children | <code>Array.&lt;(InputDataDevice\|InputDataEndpoint\|InputDataEndpointGroup)&gt;</code> |  |
+| nodeTypeName | <code>string</code> | <p>equals SpinalBmsDevice.nodeTypeName</p> |
+
+
+* [InputDataDevice](#InputDataDevice)
+    * [.InputDataDevice](#InputDataDevice.InputDataDevice)
+        * [new InputDataDevice([name], [type], [id], [path])](#new_InputDataDevice.InputDataDevice_new)
+
+<a name="InputDataDevice.InputDataDevice"></a>
+
+### InputDataDevice.InputDataDevice
+**Kind**: static class of [<code>InputDataDevice</code>](#InputDataDevice)  
+<a name="new_InputDataDevice.InputDataDevice_new"></a>
+
+#### new InputDataDevice([name], [type], [id], [path])
+<p>Creates an instance of InputDataDevice.</p>
+
+
+| Param | Type | Default |
+| --- | --- | --- |
+| [name] | <code>string</code> | <code>&quot;&#x27;default device name&#x27;&quot;</code> | 
+| [type] | <code>string</code> | <code>&quot;&#x27;default device type&#x27;&quot;</code> | 
+| [id] | <code>string</code> | <code>&quot;genUID(&#x27;InputDataDevice&#x27;)&quot;</code> | 
+| [path] | <code>string</code> | <code>&quot;&#x27;default device path&#x27;&quot;</code> | 
+
+<a name="InputDataEndpoint"></a>
+
+## InputDataEndpoint
+**Kind**: global class  
+**Implements**: <code>idEndpoint</code>  
+**Export**:   
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| id | <code>string</code> |  |
+| name | <code>string</code> |  |
+| path | <code>string</code> |  |
+| currentValue | <code>number</code> \| <code>string</code> |  |
+| unit | <code>string</code> |  |
+| dataType | <code>InputDataEndpointDataType</code> |  |
+| type | <code>InputDataEndpointType</code> |  |
+| nodeTypeName | <code>string</code> | <p>equal SpinalBmsEndpoint.nodeTypeName</p> |
+| timeseries | <code>Array.&lt;any&gt;</code> |  |
+
+
+* [InputDataEndpoint](#InputDataEndpoint)
+    * [.InputDataEndpoint](#InputDataEndpoint.InputDataEndpoint)
+        * [new InputDataEndpoint([name], [currentValue], [unit], [dataType], [type], [id], [path])](#new_InputDataEndpoint.InputDataEndpoint_new)
+
+<a name="InputDataEndpoint.InputDataEndpoint"></a>
+
+### InputDataEndpoint.InputDataEndpoint
+**Kind**: static class of [<code>InputDataEndpoint</code>](#InputDataEndpoint)  
+<a name="new_InputDataEndpoint.InputDataEndpoint_new"></a>
+
+#### new InputDataEndpoint([name], [currentValue], [unit], [dataType], [type], [id], [path])
+<p>Creates an instance of InputDataEndpoint.</p>
+
+
+| Param | Type | Default |
+| --- | --- | --- |
+| [name] | <code>string</code> | <code>&quot;&#x27;default endpoint name&#x27;&quot;</code> | 
+| [currentValue] | <code>number</code> \| <code>string</code> | <code>0</code> | 
+| [unit] | <code>string</code> | <code>&quot;&#x27;unit&#x27;&quot;</code> | 
+| [dataType] | <code>InputDataEndpointDataType</code> | <code>InputDataEndpointDataType.Integer</code> | 
+| [type] | <code>InputDataEndpointType</code> | <code>InputDataEndpointType.Other</code> | 
+| [id] | <code>string</code> | <code>&quot;genUID(&#x27;InputDataEndpoint&#x27;)&quot;</code> | 
+| [path] | <code>string</code> | <code>&quot;&#x27;default endpoint path&#x27;&quot;</code> | 
+
+<a name="InputDataEndpointGroup"></a>
+
+## InputDataEndpointGroup
+**Kind**: global class  
+**Implements**: <code>idEndpointGroup</code>  
+**Export**:   
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| id | <code>string</code> |  |
+| name | <code>string</code> |  |
+| type | <code>string</code> |  |
+| path | <code>string</code> |  |
+| children | [<code>Array.&lt;InputDataEndpoint&gt;</code>](#InputDataEndpoint) |  |
+| nodeTypeName | <code>string</code> | <p>equals SpinalBmsEndpointGroup.nodeTypeName</p> |
+
+
+* [InputDataEndpointGroup](#InputDataEndpointGroup)
+    * [.InputDataEndpointGroup](#InputDataEndpointGroup.InputDataEndpointGroup)
+        * [new InputDataEndpointGroup([name], [type], [id], [path])](#new_InputDataEndpointGroup.InputDataEndpointGroup_new)
+
+<a name="InputDataEndpointGroup.InputDataEndpointGroup"></a>
+
+### InputDataEndpointGroup.InputDataEndpointGroup
+**Kind**: static class of [<code>InputDataEndpointGroup</code>](#InputDataEndpointGroup)  
+<a name="new_InputDataEndpointGroup.InputDataEndpointGroup_new"></a>
+
+#### new InputDataEndpointGroup([name], [type], [id], [path])
+<p>Creates an instance of InputDataEndpointGroup.</p>
+
+
+| Param | Type | Default |
+| --- | --- | --- |
+| [name] | <code>string</code> | <code>&quot;&#x27;default EndpointGroup name&#x27;&quot;</code> | 
+| [type] | <code>string</code> | <code>&quot;&#x27;default EndpointGroup type&#x27;&quot;</code> | 
+| [id] | <code>string</code> | <code>&quot;genUID(&#x27;InputDataEndpointGroup&#x27;)&quot;</code> | 
+| [path] | <code>string</code> | <code>&quot;&#x27;default EndpointGroup path&#x27;&quot;</code> | 
+
 <a name="NetworkProcess"></a>
 
 ## NetworkProcess
@@ -173,7 +311,7 @@ The organ will search for `organ.ContextType` and  `organ.networkType` then crea
 
 | Param | Type |
 | --- | --- |
-| obj | <code>InputDataDevice</code> | 
+| obj | [<code>InputDataDevice</code>](#InputDataDevice) | 
 
 <a name="NetworkProcess.NetworkProcess"></a>
 
