@@ -57,7 +57,7 @@ class InputData {
    * @memberof InputData
    */
   constructor() {
-    const intervalTest = 4000;
+    const intervalTest = 2000;
     this.devices = [];
     this.onData = null;
     this.generateData();
@@ -88,8 +88,8 @@ class InputData {
    */
   private generateData() {
     this.devices.push(this.generateDataDevice(1));
-    this.devices.push(this.generateDataDevice(2));
-    this.devices.push(this.generateDataDevice(3));
+    // this.devices.push(this.generateDataDevice(2));
+    // this.devices.push(this.generateDataDevice(3));
   }
 
   /**
@@ -153,7 +153,9 @@ class InputData {
   private updateDevice(deviceOrEnpointGroup: InputDataDevice|InputDataEndpointGroup): void {
     for (const child of deviceOrEnpointGroup.children) {
       if (child instanceof InputDataEndpoint) {
-        child.currentValue = Math.floor(Math.random() * 100);
+        child.idx += 1;
+        const nbr = Math.sin(child.idx * (Math.PI / 30));
+        child.currentValue = Math.floor(nbr * 100);
       } else if (child instanceof InputDataDevice || child instanceof InputDataEndpointGroup) {
         this.updateDevice(child);
       }

@@ -22,20 +22,20 @@
  * <http://resources.spinalcom.com/licenses.pdf>.
  */
 
-import { spinalCore } from 'spinal-core-connectorjs_type';
-import { ForgeFileItem } from 'spinal-lib-forgefile';
+import { FileSystem, spinalCore } from "spinal-core-connectorjs_type";
+import { ForgeFileItem } from "spinal-lib-forgefile";
 
-require('json5/lib/register');
+require("json5/lib/register");
 // get the config
-const config = require('../config.json5');
+const config = require("../config.json5");
 
-import { InputData } from './modules/InputData/InputData';
-import { NetworkProcess } from './modules/NetworkProcess';
+import { InputData } from "./modules/InputData/InputData";
+import { NetworkProcess } from "./modules/NetworkProcess";
 
 // connection string to connect to spinalhub
-const connectOpt =
-    `http://${config.spinalConnector.user}:${config.spinalConnector.password}@${
-        config.spinalConnector.host}:${config.spinalConnector.port}/`;
+const connectOpt = `http://${config.spinalConnector.user}:${
+  config.spinalConnector.password
+}@${config.spinalConnector.host}:${config.spinalConnector.port}/`;
 
 // initialize the connection
 const conn = spinalCore.connect(connectOpt);
@@ -51,7 +51,7 @@ function onLoadError() {
 
 // called if connected to the server and if the spinalhub sent us the Model
 function onLoadSuccess(forgeFile: ForgeFileItem) {
-  console.log('Connected to the server and got a the Entry Model');
+  console.log("Connected to the server and got a the Entry Model");
   const inputData = new InputData();
   const networkProcess = new NetworkProcess(inputData);
 

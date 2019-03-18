@@ -55,6 +55,7 @@ export class InputDataEndpoint implements idEndpoint {
   public type: InputDataEndpointType;
   public nodeTypeName: string;
   public timeseries: any[];
+  public idx: number;
 
   /**
    *Creates an instance of InputDataEndpoint.
@@ -85,5 +86,6 @@ export class InputDataEndpoint implements idEndpoint {
     this.unit = unit;
     this.dataType = dataType;
     this.timeseries = [];
+    this.idx = Math.floor(Math.random() * 100);
   }
 }
