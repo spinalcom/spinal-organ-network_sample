@@ -26,10 +26,10 @@ import {
   InputDataEndpoint as idEndpoint,
   InputDataEndpointDataType,
   InputDataEndpointType,
-  SpinalBmsEndpoint,
-} from 'spinal-model-bmsnetwork';
+  SpinalBmsEndpoint
+} from "spinal-model-bmsnetwork";
 
-import { genUID } from '../../../Utils/genUID';
+import { genUID } from "../../../Utils/genUID";
 
 /**
  * @property {string} id
@@ -49,7 +49,7 @@ export class InputDataEndpoint implements idEndpoint {
   public id: string;
   public name: string;
   public path: string;
-  public currentValue: number | string;
+  public currentValue: number | string | boolean;
   public unit: string;
   public dataType: InputDataEndpointDataType;
   public type: InputDataEndpointType;
@@ -69,13 +69,13 @@ export class InputDataEndpoint implements idEndpoint {
    * @memberof InputDataEndpoint
    */
   constructor(
-    name: string = 'default endpoint name',
-    currentValue: number | string = 0,
-    unit: string = 'unit',
+    name: string = "default endpoint name",
+    currentValue: number | string | boolean = 0,
+    unit: string = "unit",
     dataType: InputDataEndpointDataType = InputDataEndpointDataType.Integer,
     type: InputDataEndpointType = InputDataEndpointType.Other,
-    id: string = genUID('InputDataEndpoint'),
-    path: string = 'default endpoint path',
+    id: string = genUID("InputDataEndpoint"),
+    path: string = "default endpoint path"
   ) {
     this.nodeTypeName = SpinalBmsEndpoint.nodeTypeName;
     this.id = id;

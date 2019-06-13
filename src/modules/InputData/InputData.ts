@@ -27,8 +27,8 @@ import {
   InputDataEndpoint,
   InputDataEndpointGroup,
   InputDataEndpointDataType,
-  InputDataEndpointType,
-} from './InputDataModel/InputDataModel';
+  InputDataEndpointType
+} from "./InputDataModel/InputDataModel";
 
 type onDataFunctionType = (obj: InputDataDevice) => void;
 
@@ -88,8 +88,16 @@ class InputData {
    */
   private generateData() {
     this.devices.push(this.generateDataDevice(1));
-    // this.devices.push(this.generateDataDevice(2));
-    // this.devices.push(this.generateDataDevice(3));
+    this.devices.push(this.generateDataDevice(2));
+    this.devices.push(this.generateDataDevice(3));
+    this.devices.push(this.generateDataDevice(4));
+    this.devices.push(this.generateDataDevice(5));
+    this.devices.push(this.generateDataDevice(6));
+    this.devices.push(this.generateDataDevice(7));
+    this.devices.push(this.generateDataDevice(8));
+    this.devices.push(this.generateDataDevice(9));
+    this.devices.push(this.generateDataDevice(10));
+    this.devices.push(this.generateDataDevice(11));
   }
 
   /**
@@ -97,50 +105,49 @@ class InputData {
    * @returns {InputDataDevice}
    * @memberof InputData
    */
-  private generateDataDevice(id : number): InputDataDevice {
-
-    function createFunc(str: string, type: string,
-                        constructor: typeof InputDataDevice | typeof InputDataEndpointGroup): any {
-      return new constructor(str, type, str, '');
+  private generateDataDevice(id: number): InputDataDevice {
+    function createFunc(
+      str: string,
+      type: string,
+      constructor: typeof InputDataDevice | typeof InputDataEndpointGroup
+    ): any {
+      return new constructor(str, type, str, "");
     }
 
-    const res: InputDataDevice = createFunc(`DEVICE ${id}`, 'device', InputDataDevice);
-    const CHILD_1: InputDataDevice = createFunc(`DEVICE ${id} CHILD_1 - device`,
-                                                'device', InputDataDevice);
-    const CHILD_1_1: InputDataEndpointGroup = createFunc(`DEVICE ${id} CHILD_1_1 group`,
-                                                         'endpointgroup', InputDataEndpointGroup);
+    const res: InputDataDevice = createFunc(
+      `Automate ${id}`,
+      "device",
+      InputDataDevice
+    );
 
-    const CHILD_1_1_1: InputDataEndpoint =
-      new InputDataEndpoint(`DEVICE ${id} CHILD_1_1_1 endpoint`, 0, 'Celsius',
-                            InputDataEndpointDataType.Integer,
-                            InputDataEndpointType.Temperature,
-                            `DEVICE-${id} CHILD_1_1_1 endpoint`, '');
-
-    const CHILD_1_2: InputDataEndpoint =
-      new InputDataEndpoint(`DEVICE ${id} CHILD_1_2 endpoint`, 0, 'Celsius',
-                            InputDataEndpointDataType.Integer,
-                            InputDataEndpointType.Temperature,
-                            `DEVICE-${id} CHILD_1_2 endpoint`, '');
-
-    CHILD_1.children.push(CHILD_1_1, CHILD_1_2);
-    CHILD_1_1.children.push(CHILD_1_1_1);
-
-    const CHILD_2: InputDataEndpointGroup = createFunc(`DEVICE ${id} CHILD_2 group`,
-                                                       'endpointgroup', InputDataEndpointGroup);
-
-    const CHILD_2_1: InputDataEndpoint =
-      new InputDataEndpoint(`DEVICE ${id} CHILD_2_1 endpoint`, 0, 'Celsius',
-                            InputDataEndpointDataType.Integer,
-                            InputDataEndpointType.Temperature,
-                            `DEVICE-${id} CHILD_2_1 endpoint`, '');
-    CHILD_2.children.push(CHILD_2_1);
-
-    const CHILD_3: InputDataEndpoint =
-      new InputDataEndpoint(`DEVICE ${id} CHILD_3 endpoint`, 0, 'Celsius',
-                            InputDataEndpointDataType.Integer,
-                            InputDataEndpointType.Temperature,
-                            `DEVICE-${id} CHILD_3 endpoint`, '');
-    res.children.push(CHILD_1, CHILD_2, CHILD_3);
+    const CHILD_3: InputDataEndpoint = new InputDataEndpoint(
+      `Température`,
+      0,
+      "Celsius",
+      InputDataEndpointDataType.Double,
+      InputDataEndpointType.Temperature,
+      `DEVICE-${id} Temperature`,
+      ""
+    );
+    const CHILD_4: InputDataEndpoint = new InputDataEndpoint(
+      `Hydrometrie`,
+      0,
+      "%",
+      InputDataEndpointDataType.Integer,
+      InputDataEndpointType.Hygrometry,
+      `DEVICE-${id} Hydrometrie`,
+      ""
+    );
+    const CHILD_5: InputDataEndpoint = new InputDataEndpoint(
+      `Présence`,
+      false,
+      "",
+      InputDataEndpointDataType.Boolean,
+      InputDataEndpointType.Occupation,
+      `DEVICE-${id} Présence`,
+      ""
+    );
+    res.children.push(CHILD_3, CHILD_4, CHILD_5);
 
     return res;
   }
@@ -150,13 +157,36 @@ class InputData {
    * @param {(InputDataDevice|InputDataEndpointGroup)} deviceOrEnpointGroup
    * @memberof InputData
    */
-  private updateDevice(deviceOrEnpointGroup: InputDataDevice|InputDataEndpointGroup): void {
+  private updateDevice(
+    deviceOrEnpointGroup: InputDataDevice | InputDataEndpointGroup
+  ): void {
+    let maxTemp = 28;
+    let minTemp = 16;
+    let maxHydro = 100;
+    let minHydro = 0;
+    let randBool = 0;
     for (const child of deviceOrEnpointGroup.children) {
       if (child instanceof InputDataEndpoint) {
         child.idx += 1;
-        const nbr = Math.sin(child.idx * (Math.PI / 30));
-        child.currentValue = Math.floor(nbr * 100);
-      } else if (child instanceof InputDataDevice || child instanceof InputDataEndpointGroup) {
+        // const nbr = Math.sin(child.idx * (Math.PI / 30));
+        if (child.type == 0) {
+          child.currentValue = Math.random() * (maxTemp - minTemp) + minTemp;
+        } else if (child.type == 1) {
+          child.currentValue = Math.random() * (maxHydro - minHydro) + minHydro;
+        } else if (child.type == 3) {
+          randBool = Math.random() * (2 - 0) + 0;
+          if (randBool >= 1) {
+            child.currentValue = true;
+          } else {
+            child.currentValue = false;
+          }
+        }
+        // console.log(child);
+        console.log(child.currentValue);
+      } else if (
+        child instanceof InputDataDevice ||
+        child instanceof InputDataEndpointGroup
+      ) {
         this.updateDevice(child);
       }
     }
