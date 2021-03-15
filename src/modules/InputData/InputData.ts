@@ -27,8 +27,8 @@ import {
   InputDataEndpoint,
   InputDataEndpointGroup,
   InputDataEndpointDataType,
-  InputDataEndpointType
-} from "./InputDataModel/InputDataModel";
+  InputDataEndpointType,
+} from './InputDataModel/InputDataModel';
 
 type onDataFunctionType = (obj: InputDataDevice) => void;
 
@@ -109,43 +109,43 @@ class InputData {
     function createFunc(
       str: string,
       type: string,
-      constructor: typeof InputDataDevice | typeof InputDataEndpointGroup
+      constructor: typeof InputDataDevice | typeof InputDataEndpointGroup,
     ): any {
-      return new constructor(str, type, str, "");
+      return new constructor(str, type, str, '');
     }
 
     const res: InputDataDevice = createFunc(
       `Automate ${id}`,
-      "device",
-      InputDataDevice
+      'device',
+      InputDataDevice,
     );
 
     const CHILD_3: InputDataEndpoint = new InputDataEndpoint(
-      `Température`,
+      'Température',
       0,
-      "Celsius",
+      'Celsius',
       InputDataEndpointDataType.Double,
       InputDataEndpointType.Temperature,
       `DEVICE-${id} Temperature`,
-      ""
+      '',
     );
     const CHILD_4: InputDataEndpoint = new InputDataEndpoint(
-      `Hydrometrie`,
+      'Hydrometrie',
       0,
-      "%",
+      '%',
       InputDataEndpointDataType.Integer,
       InputDataEndpointType.Hygrometry,
       `DEVICE-${id} Hydrometrie`,
-      ""
+      '',
     );
     const CHILD_5: InputDataEndpoint = new InputDataEndpoint(
-      `Présence`,
+      'Présence',
       false,
-      "",
+      '',
       InputDataEndpointDataType.Boolean,
       InputDataEndpointType.Occupation,
       `DEVICE-${id} Présence`,
-      ""
+      '',
     );
     res.children.push(CHILD_3, CHILD_4, CHILD_5);
 
@@ -158,22 +158,22 @@ class InputData {
    * @memberof InputData
    */
   private updateDevice(
-    deviceOrEnpointGroup: InputDataDevice | InputDataEndpointGroup
+    deviceOrEnpointGroup: InputDataDevice | InputDataEndpointGroup,
   ): void {
-    let maxTemp = 28;
-    let minTemp = 16;
-    let maxHydro = 100;
-    let minHydro = 0;
+    const maxTemp = 28;
+    const minTemp = 16;
+    const maxHydro = 100;
+    const minHydro = 0;
     let randBool = 0;
     for (const child of deviceOrEnpointGroup.children) {
       if (child instanceof InputDataEndpoint) {
         child.idx += 1;
         // const nbr = Math.sin(child.idx * (Math.PI / 30));
-        if (child.type == 0) {
+        if (child.type === InputDataEndpointType.Temperature) {
           child.currentValue = Math.random() * (maxTemp - minTemp) + minTemp;
-        } else if (child.type == 1) {
+        } else if (child.type === InputDataEndpointType.Hygrometry) {
           child.currentValue = Math.random() * (maxHydro - minHydro) + minHydro;
-        } else if (child.type == 3) {
+        } else if (child.type === InputDataEndpointType.Occupation) {
           randBool = Math.random() * (2 - 0) + 0;
           if (randBool >= 1) {
             child.currentValue = true;
